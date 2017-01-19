@@ -117,8 +117,7 @@ public class RSA {
 			BigInteger n, BigInteger e, BigInteger phi, String privFileName)
 			throws IOException {
 
-		System.out.println("Creating private key and saving to: "
-				+ privFileName);
+		System.out.println("Creating private key and saving to: " + privFileName);
 		BigInteger d = e.modInverse(phi);
 		saveKey(new PrivateKey(n, d, p, q), privFileName);
 		return d;
@@ -183,8 +182,7 @@ public class RSA {
 		// block size must be > 0
 		blockSize = blockSize > 0 ? blockSize : 1;
 
-		System.out.println("Splitting text into blocks with a block size = "
-				+ blockSize);
+		System.out.println("Splitting text into blocks with a block size = " + blockSize);
 
 		for (int i = 0; i < plainText.length(); i += blockSize) {
 			int end = i + blockSize;
@@ -345,21 +343,17 @@ public class RSA {
 			System.out.println();
 			// Create keys
 			if (i == 1) {
-				System.out
-						.println("How many digits should the prime numbers be?: ");
+				System.out.println("How many digits should the prime numbers be?: ");
 				int numOfDigits = in.nextInt();
-				System.out
-						.println("What do you want to name the public key file?:  ");
+				System.out.println("What do you want to name the public key file?:  ");
 				String pubFileName = in.next();
-				System.out
-						.println("What do you want to name the private key file?:  ");
+				System.out.println("What do you want to name the private key file?:  ");
 				String privFileName = in.next();
 				RSA.createKeys(numOfDigits, pubFileName, privFileName);
 			}
 			// Load private key
 			if (i == 2) {
-				System.out
-						.println("What is the name of the private key file?: ");
+				System.out.println("What is the name of the private key file?: ");
 				String privFileName = in.next();
 				loadedPrivKey = (PrivateKey) RSA.loadKey(privFileName);
 			}
@@ -376,16 +370,14 @@ public class RSA {
 					continue;
 				}
 
-				System.out
-						.println("What is the name of the file to be encrypted?: ");
+				System.out.println("What is the name of the file to be encrypted?: ");
 				String plainTextFileName = in.next();
 				String plainText = RSA.loadPlainText(plainTextFileName);
 
 				List<BigInteger> cipherText = RSA.encrypt(plainText,
 						loadedPubKey);
 				System.out.println("Cipher text = " + cipherText);
-				System.out
-						.println("What do you want to name the encrypted file?: ");
+				System.out.println("What do you want to name the encrypted file?: ");
 
 				String cipherTextFileName = in.next();
 				RSA.saveCipherText(cipherText, cipherTextFileName);
@@ -398,12 +390,10 @@ public class RSA {
 					continue;
 				}
 
-				System.out
-						.println("What is the name of the file to be decrypted?: ");
+				System.out.println("What is the name of the file to be decrypted?: ");
 				String cipherTextFileName = in.next();
 
-				List<String> cipherTextList = RSA
-						.loadCipherText(cipherTextFileName);
+				List<String> cipherTextList = RSA.loadCipherText(cipherTextFileName);
 				System.out.println("Cipher text = " + cipherTextList);
 				StringBuilder plainText = new StringBuilder();
 
@@ -413,8 +403,7 @@ public class RSA {
 					plainText.append(m.toString(36));
 				}
 
-				System.out.println("Decrypted Message = "
-						+ plainText.toString());
+				System.out.println("Decrypted Message = " + plainText.toString());
 			}
 			if (i == 6) {
 				
@@ -422,8 +411,7 @@ public class RSA {
 				String privFileName = "test_priv.key";
 				boolean testsFailed = false;
 				
-				System.out
-						.println("How many tests cases do you want to run?: ");
+				System.out.println("How many tests cases do you want to run?: ");
 				int numOfTestCases = in.nextInt();
 				
 				for (int j = 0; j < numOfTestCases; j++) {
@@ -438,13 +426,11 @@ public class RSA {
 
 					// Create some random plain text
 					int rndBitLength = r.nextInt(4096) + 1;
-					String rndPlainText = new BigInteger(rndBitLength, r)
-							.toString(36);
+					String rndPlainText = new BigInteger(rndBitLength, r).toString(36);
 					rndPlainText = rndPlainText.replaceAll("[^a-zA-Z]", "");
 
 					// encrypt the plain text
-					List<BigInteger> cipherTextInBlocks = RSA.encrypt(rndPlainText,
-							loadedPubKey);
+					List<BigInteger> cipherTextInBlocks = RSA.encrypt(rndPlainText,	loadedPubKey);
 					StringBuilder plainText = new StringBuilder();
 
 					// Decrypt the text
